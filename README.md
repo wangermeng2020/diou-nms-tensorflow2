@@ -4,10 +4,10 @@
 ```
 python3 test.py
 ```
-
+ ![sss](test_pictures/result.jpg)
 
 
 # References
 * [Distance-IoU Loss: Faster and Better Learning for Bounding Box Regression](https://arxiv.org/pdf/1911.08287)
 
- ![sss](test_pictures/result.jpg)
+
