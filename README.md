@@ -1,5 +1,8 @@
 # an implementing of diou non maximum suppression using tensorflow and python
 
+# Prerequisites
+* tensorflow2.x
+
 # test
 ```
 python3 test.py
