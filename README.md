@@ -1,4 +1,4 @@
-# an implementing of diou non maximum suppression using tensorflow and python
+# an implementing of Distance-IoU non maximum suppression using tensorflow and python
 
 # Prerequisites
 * tensorflow2.x
