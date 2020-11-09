@@ -4,7 +4,7 @@
 ```
 python3 test.py
 ```
- ![sss](test_pictures/result.jpg)
+ ![test_result_image](test_pictures/result.jpg)
 
 
 # References
