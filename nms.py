@@ -1,6 +1,7 @@
 
 """
-
+DIoU proposed in https://arxiv.org/abs/1911.08287v1,
+"Distance-IoU Loss: Faster and Better Learning for Bounding Box Regression"
 """
 import numpy as np
 import tensorflow as tf
