@@ -75,13 +75,15 @@ def diou_nms_np(batch_boxes, batch_scores, iou_threshold=0.1, score_threshold=0.
             scores = scores[1:][valid_mask]
             classes = classes[1:][valid_mask]
 
-        result_boxes = np.array(result_boxes)
-        result_scores = np.array(result_scores)
-        result_classes = np.array(result_classes)
-        num_valid = np.shape(result_boxes)[0]
-        result_boxes = np.pad(result_boxes, ((0, max_box_num-num_valid), (0,0)))
-        result_scores = np.pad(result_scores, ((0, max_box_num - num_valid), ))
-        result_classes = np.pad(result_classes, ((0, max_box_num - num_valid),))
+        num_valid = len(result_boxes)
+        num_valid = np.minimum(num_valid, max_box_num)
+        result_boxes = np.array(result_boxes)[:num_valid, :]
+        result_scores = np.array(result_scores)[:num_valid]
+        result_classes = np.array(result_classes)[:num_valid]
+        pad_size = max_box_num - num_valid
+        result_boxes = np.pad(result_boxes, ((0, pad_size), (0, 0)))
+        result_scores = np.pad(result_scores, ((0, pad_size),))
+        result_classes = np.pad(result_classes, ((0, pad_size),))
 
         batch_result_boxes[batch_index] = result_boxes
         batch_result_scores[batch_index] = result_scores
@@ -153,7 +155,13 @@ def diou_nms_tf(batch_boxes, batch_scores, iou_threshold=0.01, score_threshold=0
         result_scores = tf.boolean_mask(scores, result_mask)
         result_classes = tf.boolean_mask(classes, result_mask)
         result_valid = tf.shape(result_boxes)[0]
-        pad_len = tf.maximum(max_box_num-result_valid, 0)
+        result_valid = tf.minimum(result_valid,max_box_num)
+
+        result_boxes = result_boxes[:result_valid, :]
+        result_scores = result_scores[:result_valid]
+        result_classes = result_classes[:result_valid]
+
+        pad_len = max_box_num-result_valid
         result_boxes = tf.pad(result_boxes,((0, pad_len),(0,0)))
         result_scores = tf.pad(result_scores, ((0, pad_len),))
         result_classes = tf.pad(result_classes, ((0, pad_len),))

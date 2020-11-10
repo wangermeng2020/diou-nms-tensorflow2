@@ -3,7 +3,8 @@ import numpy as np
 import cv2
 from nms import  diou_nms_np
 from nms import  diou_nms_tf
-
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = "-1"
 ori_img = cv2.imread('test_pictures/1.jpg')
 dst_img = ori_img.copy()
 #
